@@ -9,6 +9,6 @@
 
    ![A1 funnel tree](A1_Funnel_Tree.png)
 
-**Data:** eCommerce Events History in Cosmetics Shop, REES46 / Open CDP (Kaggle), Oct 2019 to Feb 2020. Credit REES46. Raw files are not included. Prices carry no currency label; results are stated in $.
+**Data:** [eCommerce Events History in Cosmetics Shop](https://www.kaggle.com/datasets/mkechinov/ecommerce-events-history-in-cosmetics-shop) (REES46 / Open CDP, Kaggle), Oct 2019 to Feb 2020. Credit: REES46 Marketing Platform. Raw files are not included in this repo (about 2.4 GB). Prices carry no currency label; results are stated in $.
 
 **Reproduce:** upload the five monthly CSVs to a Databricks volume (`/Volumes/workspace/cart_leakage/raw/`) and run the queries in order.

@@ -2,11 +2,13 @@
 
 **Question:** How much revenue leaks between add-to-cart and purchase, which categories and brands cause it, and what is a cart-reminder nudge worth per month?
 
-**Answer:** About $3.93M of cart value goes unbought each month (76.5% of carts abandoned); 83 of 465 categories hold 80% of it. A nudge recovering 10% is worth about $91K a month net, at an assumed 25% margin.
+- **What I did:** Loaded 20.7M shopping events (2.4 GB) into Databricks and followed every cart to see whether it was bought within 7 days.
+- **What I found:** **76.5% of carts are abandoned: $3.93M of products left unbought every month.** Half of it sits in just 23 of 465 categories.
+- **Why it matters:** A reminder that wins back only 10% adds about $91K a month. Start with those 23 categories.
 
 **Interactive case file:** [parthdhawan921-ops.github.io/Parth_Personal/#cart](https://parthdhawan921-ops.github.io/Parth_Personal/#cart)
 
-![Funnel tree: 20.7M events to a $91K-a-month reminder idea](A1_Funnel_Tree.png)
+![Databricks pipeline: 5 CSVs (2.4 GB) to a Unity Catalog volume, then Delta tables events_raw (20.69M rows), events (19.50M) and cart_outcomes (4.52M carts)](images/databricks_pipeline.png)
 
 ## Key findings
 
@@ -20,9 +22,11 @@
 | Repeat buyers | 9.2% of Nov and Dec first-time buyers buy again the next month |
 | Value of a cart reminder at 10% recovery | About $91K a month net (5% = $42K, 15% = $140K) |
 
-## Databricks pipeline
+## Funnel at a glance
 
-![Databricks pipeline: 5 CSVs (2.4 GB) to a Unity Catalog volume, then Delta tables events_raw (20.69M rows), events (19.50M) and cart_outcomes (4.52M carts)](images/databricks_pipeline.png)
+![Funnel tree: 20.7M events to a $91K-a-month reminder idea](A1_Funnel_Tree.png)
+
+## Databricks pipeline
 
 Five monthly CSVs (2.4 GB) land in a Unity Catalog volume. One `read_files` query loads them into a Delta table, and each step after that is its own Delta table: `events_raw` (20.69M rows) → `events` (19.50M, cleaned) → `cart_outcomes` (4.52M carts, one per user, product and day). Every query is in [A1_queries_as_run.sql](A1_queries_as_run.sql).
 

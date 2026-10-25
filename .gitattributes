@@ -1,0 +1,2 @@
+# Count SQL files in the repository language stats.
+*.sql linguist-detectable=true

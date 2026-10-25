@@ -6,7 +6,7 @@
 - **What I found:** **76.5% of carts are abandoned: $3.93M of products left unbought every month.** Half of it sits in just 23 of 465 categories.
 - **Why it matters:** A reminder that wins back only 10% adds about $91K a month. Start with those 23 categories.
 
-**Interactive case file:** [parthdhawan921-ops.github.io/Parth_Personal/#cart](https://parthdhawan921-ops.github.io/Parth_Personal/#cart)
+**Interactive case file:** [parthdhawan921-ops.github.io/Parth_Personal/#cart](https://parthdhawan921-ops.github.io/Parth_Personal/#cart) · **[🎞️ 11-slide presentation](presentation/Cart_Leakage_Analysis.pdf)** ([PowerPoint](presentation/Cart_Leakage_Analysis.pptx))
 
 ![Databricks pipeline: 5 CSVs (2.4 GB) to a Unity Catalog volume, then Delta tables events_raw (20.69M rows), events (19.50M) and cart_outcomes (4.52M carts)](images/databricks_pipeline.png)
 
@@ -62,6 +62,7 @@ Databricks Free Edition, Unity Catalog, Delta tables, Databricks SQL (CTEs, wind
 - [A1_queries_as_run.sql](A1_queries_as_run.sql): all queries, exactly as run
 - [A1_Funnel_Tree.png](A1_Funnel_Tree.png): funnel and findings at a glance
 - [images/databricks_pipeline.png](images/databricks_pipeline.png): the Databricks pipeline with row counts
+- [presentation/](presentation/): 11-slide findings deck, as PDF and PowerPoint with speaker notes
 
 ## Data
 

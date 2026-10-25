@@ -1,10 +1,12 @@
-# A1: Cart leakage and repeat cohorts (Databricks SQL)
+# Cart leakage and retention analysis (Databricks SQL)
 
 **Question:** How much revenue leaks between add-to-cart and purchase, which categories and brands cause it, and what is a cart-reminder nudge worth per month?
 
 **Answer:** About $3.93M of cart value goes unbought each month (76.5% of carts abandoned); 83 of 465 categories hold 80% of it. A nudge recovering 10% is worth about $91K a month net, at an assumed 25% margin.
 
-![A1 funnel tree](A1_Funnel_Tree.png)
+**Interactive case file:** [parthdhawan921-ops.github.io/Parth_Personal/#cart](https://parthdhawan921-ops.github.io/Parth_Personal/#cart)
+
+![Funnel tree: 20.7M events to a $91K-a-month reminder idea](A1_Funnel_Tree.png)
 
 ## Key findings
 
@@ -17,6 +19,12 @@
 | Category concentration | 23 of 465 categories hold 50% of the leak; 83 hold 80% |
 | Repeat buyers | 9.2% of Nov and Dec first-time buyers buy again the next month |
 | Value of a cart reminder at 10% recovery | About $91K a month net (5% = $42K, 15% = $140K) |
+
+## Databricks pipeline
+
+![Databricks pipeline: 5 CSVs (2.4 GB) to a Unity Catalog volume, then Delta tables events_raw (20.69M rows), events (19.50M) and cart_outcomes (4.52M carts)](images/databricks_pipeline.png)
+
+Five monthly CSVs (2.4 GB) land in a Unity Catalog volume. One `read_files` query loads them into a Delta table, and each step after that is its own Delta table: `events_raw` (20.69M rows) → `events` (19.50M, cleaned) → `cart_outcomes` (4.52M carts, one per user, product and day). Every query is in [A1_queries_as_run.sql](A1_queries_as_run.sql).
 
 ## Recommendation
 
@@ -49,6 +57,7 @@ Databricks Free Edition, Unity Catalog, Delta tables, Databricks SQL (CTEs, wind
 - [A1_memo.md](A1_memo.md): one-page memo with the recommendation
 - [A1_queries_as_run.sql](A1_queries_as_run.sql): all queries, exactly as run
 - [A1_Funnel_Tree.png](A1_Funnel_Tree.png): funnel and findings at a glance
+- [images/databricks_pipeline.png](images/databricks_pipeline.png): the Databricks pipeline with row counts
 
 ## Data
 
